@@ -44,6 +44,8 @@ exports.login = async (req, res, next) => {
 
         if(verifyPassword){
             const token = await jwt.sign({_id: verifyUser._id}, 'secret');
+            verifyUser.token = token;
+            verifyUser.save();
             res.cookie('x_auth', token).json({success: true, isAuth: true});
         } else {
             res.json({
