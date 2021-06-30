@@ -65,3 +65,7 @@ exports.login = async (req, res, next) => {
 }
 
 
+exports.logout = async (req, res, next) => {
+    const user = req.user;
+    res.json({user})
+}

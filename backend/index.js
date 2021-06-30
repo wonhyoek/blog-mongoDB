@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const userRouter = require('./router/user');
 
 
@@ -23,6 +24,7 @@ mongoose.connect(
 app.use(express.json());
 app.use(helmet());
 app.use(cors());
+app.use(cookieParser());
 app.use(morgan('dev'));
 
 app.use((err, req, res, next) => {
