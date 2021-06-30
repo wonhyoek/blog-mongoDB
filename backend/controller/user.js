@@ -66,6 +66,13 @@ exports.login = async (req, res, next) => {
 
 
 exports.logout = async (req, res, next) => {
-    const user = req.user;
-    res.json({user})
+    
+    try {
+        const userId = req.params.id;
+        const setTokenBlank = await User.findOneAndUpdate({_id: userId}, {token: ""});
+        setTokenBlank && res.json({success: true, isAuth: false});
+    } catch (err) {
+        next(err);
+    }
+    
 }
