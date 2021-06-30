@@ -80,5 +80,5 @@ exports.logout = async (req, res, next) => {
 
 exports.auth = async (req, res, next) => {
     const user = req.user;
-    res.json({user});
+    res.json({success: true, isAuth: true, user});
 }
