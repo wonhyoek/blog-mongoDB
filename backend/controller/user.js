@@ -43,10 +43,14 @@ exports.login = async (req, res, next) => {
         const verifyPassword = await bcrypt.compare(password, verifyUser.password);
 
         if(verifyPassword){
+            
             const token = await jwt.sign({_id: verifyUser._id}, 'secret');
+
             verifyUser.token = token;
             verifyUser.save();
+
             res.cookie('x_auth', token).json({success: true, isAuth: true});
+
         } else {
             res.json({
                 success: false, isAuth: false, message: "unvalid password"
@@ -59,3 +63,5 @@ exports.login = async (req, res, next) => {
     }
 
 }
+
+
